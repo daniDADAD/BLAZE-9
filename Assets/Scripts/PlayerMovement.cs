@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     Rigidbody2D rb;
-
+    public Animator animator;
     public float jumpForce;
     public float speed;
     public float acceleration;
@@ -28,37 +28,25 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(controller.sprint))
         {
             speedCap = speed * 2;
+            
         }
         if (Input.GetKey(controller.left))
         {
 
             currentSpeed = -speedCap;
-
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
 
         }
         if (Input.GetKey(controller.right))
         {
 
             currentSpeed = speedCap;
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
 
 
-
         }
-        bool isNegative = currentSpeed < 0;
-        float reduceSpeed = (isNegative) ? -friction : friction;
-        if (!grounded)
-        {
-            reduceSpeed /= 2;
-        }
-        Debug.Log(Math.Abs(currentSpeed - reduceSpeed * Time.deltaTime));
-        if (Math.Abs(currentSpeed - reduceSpeed * Time.deltaTime) <= 0)
-        {
-            currentSpeed = 0;
-        }
-        else
-        {
-            currentSpeed -= reduceSpeed * Time.deltaTime;
-        }
+        Friction();
+        animator.SetFloat("Speed", Mathf.Abs(currentSpeed));
         rb.linearVelocityX = currentSpeed;
         if (Input.GetKey(controller.jump))
         {
@@ -70,6 +58,26 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+    }
+    private void Friction()
+    {
+        if (currentSpeed == 0)
+            return;
+        bool isNegative = currentSpeed < 0;
+        float reduceSpeed = (isNegative) ? -friction : friction;
+        if (!grounded)
+        {
+            reduceSpeed /= 2;
+        }
+        Debug.Log(Math.Abs(currentSpeed - reduceSpeed * Time.deltaTime));
+        if (Math.Abs(currentSpeed - reduceSpeed * Time.deltaTime) <= 0.1f)
+        {
+            currentSpeed = 0;
+        }
+        else
+        {
+            currentSpeed -= reduceSpeed * Time.deltaTime;
+        }
     }
     private enum HitDirection { None, Top, Bottom, Forward, Back, Left, Right };
     private HitDirection GetDirection(GameObject ObjectHit)
@@ -110,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentSpeed = 0.0f;
             grounded = true;
-
+            animator.SetBool("Jumping", !grounded);
         }
     }
 
@@ -125,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
 
         {
             grounded = false;
+            animator.SetBool("Jumping", !grounded);
         }
 
     }
