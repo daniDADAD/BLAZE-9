@@ -281,9 +281,9 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0
+  m_AngularDamping: 1
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a7ee511a695bff1459bbb644f894d4c5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -293,7 +293,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &303051469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09c7c383ff3a8e42921ce7f5cf6641e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 20
+  jumpForce: 6
+  speed: 5
+  acceleration: 5
+  friction: 10
 --- !u!61 &303051470
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -317,7 +320,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a7ee511a695bff1459bbb644f894d4c5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1780,6 +1783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1111047928}
+  - component: {fileID: 1111047929}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -1802,6 +1806,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 303051467}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1111047929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111047927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b7da221a56b2554b82c20bf6e6a8023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jump: 119
+  left: 97
+  right: 100
+  crouch: 115
+  sprint: 304
+  attack: 0
 --- !u!1 &1123374783
 GameObject:
   m_ObjectHideFlags: 0
