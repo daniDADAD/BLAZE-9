@@ -27,9 +27,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(controller.sprint))
         {
-            speedCap = speed * 2;
-            
+            speedCap = speed * 1.25f;
+
         }
+        
         if (Input.GetKey(controller.left))
         {
 
