@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour
     public KeyCode right = KeyCode.D;
     public KeyCode crouch = KeyCode.S;
     public KeyCode sprint = KeyCode.LeftShift;
+   
     public MouseButton attack = MouseButton.Left;
     private static Controller instance;
     public static Controller Instance { get { return instance; } }

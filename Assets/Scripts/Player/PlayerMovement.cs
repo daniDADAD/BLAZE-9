@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         {
             reduceSpeed /= 2;
         }
-        Debug.Log(Math.Abs(currentSpeed - reduceSpeed * Time.deltaTime));
+       //  Debug.Log(Math.Abs(currentSpeed - reduceSpeed * Time.deltaTime));
         if (Math.Abs(currentSpeed - reduceSpeed * Time.deltaTime) <= 0.1f)
         {
             currentSpeed = 0;
@@ -111,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
 
     {
-        Debug.Log(GetDirection(collision.collider.gameObject));
+   
         // Check if the collided object has the "Collidable" tag
 
         if (collision.collider.CompareTag("Collidable"))
