@@ -42,7 +42,6 @@ public class PlayerSave : MonoBehaviour
             file_converter.Serialize(my_stream, sav);
             my_stream.Close();
         }
-        Debug.Log(file_path);
         currentCooldownSecond = saveInterval;
     }
     private void LoadGame()
@@ -62,6 +61,8 @@ public class PlayerSave : MonoBehaviour
             catch (SerializationException e)
             {
                 File.Delete(file_path);
+                Debug.LogError(e);
+
             }
 
 
