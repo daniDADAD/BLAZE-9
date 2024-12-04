@@ -453,7 +453,7 @@ Transform:
   m_GameObject: {fileID: 303051465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.03, y: 3.8, z: 0}
+  m_LocalPosition: {x: -1.82, y: 1.41, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 303051472}
-  attackCooldownSecond: 1
+  M1CooldownTime: 0
 --- !u!114 &303051475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,7 +2295,7 @@ Transform:
   m_GameObject: {fileID: 939474156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.467186, y: 0.75843143, z: 0}
+  m_LocalPosition: {x: -4.95, y: 1.24, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
