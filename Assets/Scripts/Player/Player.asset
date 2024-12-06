@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f8292df53d77a4c86b27c70a414c02, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Player
-  m_EditorClassIdentifier: 
-  health: 100
-  movementSpeed: 4
+  m_EditorClassIdentifier: Assembly-CSharp::EntityStats
+  maxHealth: 100
+  movementSpeed: 5
   name: Player
   damage: 20
   jumpStrength: 5
+  currentHealth: 0
+  isInvincible: 0

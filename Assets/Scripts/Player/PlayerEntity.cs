@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
-    public Entity stats;
+
+    private Entity entity;
+    public Entity getEntity()
+    {
+        return this.entity;
+    }
+    public EntityStats stats;
     Global global;
     public Animator animator;
     float M1CooldownTime = 0.0f;
@@ -14,7 +19,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     private float currentSpeed = 0.0f;
     private bool grounded;
-
+    private int prevHealth;
 
     AnimatorStateInfo animStateInfo;
     int damage;
@@ -23,15 +28,24 @@ public class Player : MonoBehaviour
     {
 
         global = Global.Instance;
-        Debug.Log(global.controller);
         M1CooldownTime = AnimationLength("Attack");
         rb = GetComponent<Rigidbody2D>();
+        entity = gameObject.AddComponent<Entity>();
+        entity.Initialize(stats);
+        prevHealth = entity.stats.currentHealth;
     }
     void Awake()
     {
 
     }
-    
+    public void Respawn()
+    {
+        animator.SetBool("Alive", true);
+        transform.position = new Vector3(0, 0, 0);
+        rb.linearVelocity = new Vector2(0, 0);
+        entity.stats.Initialize();
+        // do everything else basically meow meow meow meow meow
+    }
     float AnimationLength(string name)
     {
         float time = 0;
@@ -40,7 +54,6 @@ public class Player : MonoBehaviour
         for (int i = 0; i < ac.animationClips.Length; i++)
             if (ac.animationClips[i].name == name)
                 time = ac.animationClips[i].length;
-        Debug.Log(time);
         return time;
     }
 
@@ -48,6 +61,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool alive = animator.GetBool("Alive");
+        if (!alive)
+        {
+
+            return;
+        }
+        if (entity.stats.currentHealth <= 0)
+        {
+            Die();
+        }
         if (Input.GetMouseButtonDown((int)global.controller.attack) &&
 
         !animator.GetBool("isAttacking")
@@ -61,14 +84,24 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("isAttacking", false);
         }
+        if (entity.stats.currentHealth < prevHealth)
+        {
+            Damage();
+        }
+        prevHealth = entity.stats.currentHealth;
         Move();
+
     }
     public bool FinishCooldown()
     {
         M1CurrentTime -= Time.deltaTime;
         return M1CurrentTime < 0.0f;
     }
-
+    public void Die()
+    {
+        animator.SetBool("Alive", false);
+        rb.linearVelocityX = 0;
+    }
     private void Attack()
     {
 
@@ -77,14 +110,19 @@ public class Player : MonoBehaviour
 
 
     }
-
+    private void Damage()
+    {
+        entity.stats.isInvincible = true;
+        StartCoroutine(entity.stats.invincibleCooldown(Global.Instance.mechanic.iFrame));
+        Debug.Log("You are damaged meow");
+    }
     private void Move()
     {
-        float speedCap = stats.movementSpeed;
+        float speedCap = entity.stats.movementSpeed;
 
         if (Input.GetKey(global.controller.sprint))
         {
-            speedCap = stats.movementSpeed * 1.25f;
+            speedCap = entity.stats.movementSpeed * 1.25f;
 
         }
 
@@ -110,7 +148,7 @@ public class Player : MonoBehaviour
         {
             if (grounded)
             {
-                rb.linearVelocityY = stats.jumpStrength;
+                rb.linearVelocityY = entity.stats.jumpStrength;
             }
 
 

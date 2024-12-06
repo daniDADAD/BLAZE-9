@@ -17,10 +17,15 @@ public class Global : MonoBehaviour
     public Controller controller;
     public class Physics
     {
-        public float friction = 1f;
-        public float ground_multiply = 4.0f;
+        public float friction = 2f;
+        public float ground_multiply = 3.0f;
         public float sprintMultiplier = 1.25f;
     }
+    public class Mechanic
+    {
+        public float iFrame = 0.5f;
+    }
+    public Mechanic mechanic;
     public Physics physics;
     private static Global instance;
     public static Global Instance { get { return instance; } }
@@ -38,6 +43,7 @@ public class Global : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             controller = new Controller();
             physics = new Physics();
+            mechanic = new Mechanic();
         }
     }
     private void OnDestroy()
