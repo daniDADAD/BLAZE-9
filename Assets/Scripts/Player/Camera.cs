@@ -1,4 +1,4 @@
-using System.Diagnostics;
+
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -8,6 +8,7 @@ public class PlayerCamera : MonoBehaviour
     void Start()
     {
         camera = GameObject.Find("PlayerCamera");
+        Debug.Log("!!!!");
     }
     enum CameraMode { Default };
     // Update is called once per frame
